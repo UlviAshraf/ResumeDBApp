@@ -5,7 +5,7 @@
  */
 package com.company.main;
 
-import java.sql.*;
+import com.company.dao.inter.UserDaoInter;
 
 /**
  *
@@ -14,16 +14,7 @@ import java.sql.*;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        getAllUser();
+      UserDaoInter dao=  Context.instanceUserDao();
+        System.out.println(dao.getAllUser());
     }
-
-    public static void getAllUser() throws Exception {
-    
-    }
-
-    public static void update() throws Exception {
-     
-    }
-
-   
 }
