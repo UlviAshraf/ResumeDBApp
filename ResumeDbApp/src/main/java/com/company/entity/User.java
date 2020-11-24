@@ -22,7 +22,7 @@ public class User {
     private Date birthDate;
     private Country nationality;
     private Country birthPlace;
-    private List<Skill> skills;
+    private List<UserSkill> skills;
 
     public User() {
     }
@@ -106,11 +106,11 @@ public class User {
         this.birthPlace = birthPlace;
     }
 
-    public List<Skill> getSkills() {
+    public List<UserSkill> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<Skill> skills) {
+    public void setSkills(List<UserSkill> skills) {
         this.skills = skills;
     }
 
