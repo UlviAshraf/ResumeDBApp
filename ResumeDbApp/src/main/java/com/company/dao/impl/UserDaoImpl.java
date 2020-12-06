@@ -22,13 +22,15 @@ import java.util.List;
  * @author UlviAshraf
  */
 public class UserDaoImpl implements UserDaoInter {
-    
+
     private User getUser(ResultSet rs) throws Exception {
         int id = rs.getInt("id");
         String name = rs.getString("name");
         String surname = rs.getString("surname");
         String email = rs.getString("email");
         String phone = rs.getString("phone");
+        String profileDesc = rs.getString("profile_description");
+        String address = rs.getString("address");
         Date birthdate = rs.getDate("birthdate");
         int birthplaceId = rs.getInt("birthplace_id");
         int nationalityId = rs.getInt("nationality_id");
@@ -36,9 +38,9 @@ public class UserDaoImpl implements UserDaoInter {
         String birthplaceStr = rs.getString("birthplace");
         Country nationality = new Country(nationalityId, null, nationalityStr);
         Country birthplace = new Country(birthplaceId, birthplaceStr, null);
-        return (new User(id, name, surname, email, phone, birthdate, nationality, birthplace));
+        return (new User(id, name, surname, email, phone, profileDesc, address, birthdate, nationality, birthplace));
     }
-    
+
     @Override
     public List<User> getAllUser() {
         List<User> result = new ArrayList();
@@ -63,24 +65,29 @@ public class UserDaoImpl implements UserDaoInter {
         }
         return result;
     }
-    
+
     @Override
     public boolean update(User u) {
         try {
             Connection c = connect();
-            PreparedStatement stmt = c.prepareStatement("update user set name=?,surname=?,email=?,phone=? where id=?");
+            PreparedStatement stmt = c.prepareStatement("update user set name=?,surname=?,email=?,phone=?,profile_description=?,address=?,birthdate=?,birthplace_id=?,nationality_id=? where id=?");
             stmt.setString(1, u.getName());
             stmt.setString(2, u.getSurname());
             stmt.setString(3, u.getEmail());
             stmt.setString(4, u.getPhone());
-            stmt.setInt(5, u.getId());
+            stmt.setString(5, u.getProfileDesc());
+            stmt.setString(6, u.getAddress());
+            stmt.setDate(7, u.getBirthDate());
+            stmt.setInt(8, u.getBirthPlace().getId());
+            stmt.setInt(9, u.getNationality().getId());
+            stmt.setInt(10, u.getId());
             return stmt.execute();
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
     }
-    
+
     @Override
     public void remove(int id) {
         try {
@@ -91,7 +98,7 @@ public class UserDaoImpl implements UserDaoInter {
             ex.printStackTrace();
         }
     }
-    
+
     @Override
     public User getById(int userId) {
         User result = null;
@@ -113,25 +120,25 @@ public class UserDaoImpl implements UserDaoInter {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
         return result;
     }
-    
+
     @Override
     public boolean addUser(User u) {
         try {
             Connection c = connect();
-            PreparedStatement stmt = c.prepareStatement("insert into user (name,surname,email,phone,id)values(?,?,?,?,?)");
+            PreparedStatement stmt = c.prepareStatement("insert into user (name,surname,email,phone,profile_description)values(?,?,?,?,?)");
             stmt.setString(1, u.getName());
             stmt.setString(2, u.getSurname());
             stmt.setString(3, u.getEmail());
             stmt.setString(4, u.getPhone());
-            stmt.setInt(5, u.getId());
+            stmt.setString(5, u.getProfileDesc());
             return stmt.execute();
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
     }
-    
+
 }

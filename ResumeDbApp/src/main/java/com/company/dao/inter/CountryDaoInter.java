@@ -15,4 +15,10 @@ import java.util.List;
 public interface CountryDaoInter {
 
     public List<Country> getAll();
+
+    public boolean update(Country country);
+
+    public boolean remove(int id);
+
+    public boolean add(Country country);
 }

@@ -9,10 +9,13 @@ import com.company.dao.inter.AbstractDao;
 import com.company.dao.inter.CountryDaoInter;
 import com.company.entity.Country;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -45,4 +48,44 @@ public class CountryDaoImpl extends AbstractDao implements CountryDaoInter {
         return result;
     }
 
+    @Override
+    public boolean update(Country country) {
+        try (Connection con = connect()) {
+            PreparedStatement stmt = con.prepareStatement("update country set name=?,nationality=? where id=?");
+            stmt.setString(1, country.getName());
+            stmt.setString(2, country.nationality());
+            stmt.setInt(3, country.getId());
+            return stmt.execute();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean remove(int id) {
+        try {
+            Connection con = connect();
+            PreparedStatement stmt = con.prepareStatement("delete from country where id=?");
+            stmt.setInt(0, id);
+            return stmt.execute();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean add(Country country) {
+        try {
+            Connection con = connect();
+            PreparedStatement stmt = con.prepareStatement("insert into country (name,nationality)values(?,?)");
+            stmt.setString(1, country.getName());
+            stmt.setString(2, country.nationality());
+            return stmt.execute();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }
