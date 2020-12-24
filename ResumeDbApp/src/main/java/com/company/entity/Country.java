@@ -6,7 +6,6 @@
 package com.company.entity;
 
 /**
- *
  * @author UlviAshraf
  */
 public class Country {
@@ -40,11 +39,11 @@ public class Country {
         this.name = name;
     }
 
-    public String nationality() {
+    public String getNationality() {
         return nationality;
     }
 
-    public void nationality(String nationality) {
+    public void setNationality(String nationality) {
         this.nationality = nationality;
     }
 
@@ -78,5 +77,5 @@ public class Country {
         return true;
     }
 
-    
+
 }

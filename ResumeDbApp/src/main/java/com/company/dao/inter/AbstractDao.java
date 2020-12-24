@@ -9,10 +9,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
- *
  * @author UlviAshraf
  */
 public abstract class AbstractDao {
+
 
     public static Connection connect() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");

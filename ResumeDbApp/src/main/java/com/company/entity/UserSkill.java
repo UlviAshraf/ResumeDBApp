@@ -6,7 +6,6 @@
 package com.company.entity;
 
 /**
- *
  * @author UlviAshraf
  */
 public class UserSkill {

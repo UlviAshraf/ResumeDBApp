@@ -6,15 +6,24 @@
 package com.company.main;
 
 import com.company.dao.inter.UserDaoInter;
+import com.company.entity.Country;
+import com.company.entity.User;
+
+import java.util.List;
 
 /**
- *
  * @author UlviAshraf
  */
 public class Main {
 
     public static void main(String[] args) throws Exception {
-      UserDaoInter dao=  Context.instanceUserDao();
-        System.out.println(dao.getAllUser());
+        UserDaoInter dao = Context.instanceUserDao();
+        User user = new User();
+        user.setName("Test");
+        user.setSurname("Testov");
+        user.setEmail("test@gmail.com");
+        user.setPhone("+994555555");
+        dao.addUser(user);
+        System.out.println(dao.getAllUser("", "", null));
     }
 }

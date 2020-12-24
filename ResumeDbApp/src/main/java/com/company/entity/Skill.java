@@ -6,7 +6,6 @@
 package com.company.entity;
 
 /**
- *
  * @author UlviAshraf
  */
 public class Skill {
@@ -40,7 +39,7 @@ public class Skill {
 
     @Override
     public String toString() {
-        return name ;
+        return name;
     }
-    
+
 }

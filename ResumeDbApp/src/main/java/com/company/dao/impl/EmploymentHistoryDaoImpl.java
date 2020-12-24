@@ -6,19 +6,22 @@
 package com.company.dao.impl;
 
 import com.company.dao.inter.AbstractDao;
+
 import static com.company.dao.inter.AbstractDao.connect;
+
 import com.company.entity.EmploymentHistory;
 import com.company.entity.User;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.company.dao.inter.EmploymentHistoryDaoInter;
 
 /**
- *
  * @author UlviAshraf
  */
 public class EmploymentHistoryDaoImpl extends AbstractDao implements EmploymentHistoryDaoInter {

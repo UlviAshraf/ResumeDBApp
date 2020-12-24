@@ -17,7 +17,6 @@ import com.company.dao.inter.UserDaoInter;
 import com.company.dao.inter.UserSkillDaoInter;
 
 /**
- *
  * @author UlviAshraf
  */
 public class Context {
@@ -37,7 +36,8 @@ public class Context {
     public static SkillDaoInter instanceSkillDao() {
         return new SkillDaoImpl();
     }
-     public static CountryDaoInter instanceCountryDao() {
+
+    public static CountryDaoInter instanceCountryDao() {
         return new CountryDaoImpl();
     }
 }

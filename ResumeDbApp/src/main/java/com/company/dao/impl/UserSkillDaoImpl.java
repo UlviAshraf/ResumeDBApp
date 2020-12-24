@@ -9,8 +9,11 @@ import com.company.entity.Skill;
 import com.company.entity.User;
 import com.company.entity.UserSkill;
 import com.company.dao.inter.AbstractDao;
+
 import static com.company.dao.inter.AbstractDao.connect;
+
 import com.company.dao.inter.UserSkillDaoInter;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,10 +21,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author UlviAshraf
  */
 public class UserSkillDaoImpl extends AbstractDao implements UserSkillDaoInter {
+
+    private UserSkill getUserSkill(ResultSet rs) throws Exception {
+        int userSkillId = rs.getInt("userSkillID");
+        int userId = rs.getInt("id");
+        int skillId = rs.getInt("skill_id");
+        int power = rs.getInt("power");
+        String skillName = rs.getString("skill_name");
+        return new UserSkill(null, new User(userId), new Skill(skillId, skillName), power);
+    }
 
     @Override
     public List<UserSkill> getAllSkillByUserId(int userId) {
@@ -52,15 +63,6 @@ public class UserSkillDaoImpl extends AbstractDao implements UserSkillDaoInter {
         }
         return result;
 
-    }
-
-    private UserSkill getUserSkill(ResultSet rs) throws Exception {
-        int userSkillId = rs.getInt("userSkillID");
-        int userId = rs.getInt("id");
-        int skillId = rs.getInt("skill_id");
-        int power = rs.getInt("power");
-        String skillName = rs.getString("skill_name");
-        return new UserSkill(userSkillId, new User(userId), new Skill(skillId, skillName), power);
     }
 
     @Override

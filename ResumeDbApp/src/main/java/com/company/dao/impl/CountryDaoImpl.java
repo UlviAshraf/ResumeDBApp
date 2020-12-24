@@ -8,6 +8,7 @@ package com.company.dao.impl;
 import com.company.dao.inter.AbstractDao;
 import com.company.dao.inter.CountryDaoInter;
 import com.company.entity.Country;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author UlviAshraf
  */
 public class CountryDaoImpl extends AbstractDao implements CountryDaoInter {
@@ -53,7 +53,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDaoInter {
         try (Connection con = connect()) {
             PreparedStatement stmt = con.prepareStatement("update country set name=?,nationality=? where id=?");
             stmt.setString(1, country.getName());
-            stmt.setString(2, country.nationality());
+            stmt.setString(2, country.getNationality());
             stmt.setInt(3, country.getId());
             return stmt.execute();
         } catch (Exception ex) {
@@ -64,8 +64,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDaoInter {
 
     @Override
     public boolean remove(int id) {
-        try {
-            Connection con = connect();
+        try (Connection con = connect()) {
             PreparedStatement stmt = con.prepareStatement("delete from country where id=?");
             stmt.setInt(0, id);
             return stmt.execute();
@@ -77,11 +76,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDaoInter {
 
     @Override
     public boolean add(Country country) {
-        try {
-            Connection con = connect();
+        try (Connection con = connect()) {
             PreparedStatement stmt = con.prepareStatement("insert into country (name,nationality)values(?,?)");
             stmt.setString(1, country.getName());
-            stmt.setString(2, country.nationality());
+            stmt.setString(2, country.getNationality());
             return stmt.execute();
         } catch (Exception ex) {
             ex.printStackTrace();

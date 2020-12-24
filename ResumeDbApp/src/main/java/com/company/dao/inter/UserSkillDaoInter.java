@@ -6,10 +6,10 @@
 package com.company.dao.inter;
 
 import com.company.entity.UserSkill;
+
 import java.util.List;
 
 /**
- *
  * @author UlviAshraf
  */
 public interface UserSkillDaoInter {
