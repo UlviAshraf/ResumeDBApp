@@ -17,6 +17,8 @@ public interface UserDaoInter {
 
     public List<User> getAllUser(String name, String surname, Integer nationalityId);
 
+    public User findByEmailAndPassword(String email, String password);
+
     public boolean update(User u);
 
     public boolean addUser(User u);

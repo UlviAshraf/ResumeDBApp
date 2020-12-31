@@ -18,12 +18,9 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         UserDaoInter dao = Context.instanceUserDao();
-        User user = new User();
-        user.setName("Test");
-        user.setSurname("Testov");
-        user.setEmail("test@gmail.com");
-        user.setPhone("+994555555");
-        dao.addUser(user);
-        System.out.println(dao.getAllUser("", "", null));
+        List<User> list = dao.getAllUser("", "", null);
+        for(User u:list){
+            System.out.println(u.getAddress());
+        }
     }
 }
